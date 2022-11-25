@@ -1,8 +1,8 @@
 export const data = [
   {
     id: 1,
-    name: "Tarea 1",
-    description: "Descripcion 1",
+    name: "Estudiar TailWind",
+    description: "Dedicar tres horas diarias ",
   },
   {
     id: 2,

@@ -1,5 +1,4 @@
 import { useState, useContext } from "react";
-import { FaTimes } from "react-icons/fa";
 import { Button } from "./components/Button";
 import { Todo } from "./components/Todo";
 import { TodoContext } from "./context/TodoContext";
@@ -8,20 +7,17 @@ export default function App() {
   const { data } = useContext(TodoContext);
   return (
     <>
-      <header className="flex justify-between">
-        <h1>Todo List</h1>
+      <header className="container flex justify-between p-4">
+        <h1 className="flex items-center justify-center">Todo List</h1>
         <Button text={"Add Todo"} />
       </header>
-      <main className="flex flex-col">
-        {data ? <h2>Your pending tasks</h2> : <h2>No tasks</h2>}
+      <main className="container flex flex-col">
         <div className="flex flex-col">
+        {data ? <h2 className="px-5">Your pending tasks</h2> : <h2>No tasks</h2>}  
           {data.map((todo) => (
             <Todo todo={{ ...todo }} />
           ))}
         </div>
-        <button className="bg-blue-500 h-16 w-16 mt-10 mx-auto rounded-lg hover:bg-blue-600 border-2 border-black">
-          Agregar
-        </button>
       </main>
     </>
   );
