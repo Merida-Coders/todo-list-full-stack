@@ -2,10 +2,11 @@ import { useState, useContext } from "react";
 import { Button } from "./components/Button";
 import { Todo } from "./components/Todo";
 import { TodoForm } from "./components/TodoForm";
+import { TodoSearch } from "./components/TodoSearch";
 import { TodoContext } from "./context/TodoContext";
 
 export default function App() {
-  const { todos } = useContext(TodoContext);
+  const { todos, searchedTodos } = useContext(TodoContext);
   const [addButtonState, setAddButtonState] = useState(false);
 
   const onToggle = () => {
@@ -24,13 +25,14 @@ export default function App() {
       </header>
       <main className="container flex flex-col">
         {addButtonState && <TodoForm />}
+        <TodoSearch />
         <div className="flex flex-col">
-          {todos ? (
+          {searchedTodos ? (
             <h2 className="px-5">Your pending tasks</h2>
           ) : (
             <h2>No tasks</h2>
           )}
-          {todos.map((todo) => (
+          {searchedTodos.map((todo) => (
             <Todo key={todo.id} todo={{ ...todo }} />
           ))}
         </div>
