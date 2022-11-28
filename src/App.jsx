@@ -8,12 +8,12 @@ export default function App() {
   return (
     <>
       <header className="container flex justify-between p-4">
-        <h1 className="flex items-center justify-center">Todo List</h1>
-        <Button text={"Add Todo"} />
+        <h1 className="flex items-center justify-center">Agenda</h1>
+        <Button text={"Agregar Tarea"} />
       </header>
       <main className="container flex flex-col">
         <div className="flex flex-col">
-        {data ? <h2 className="px-5">Your pending tasks</h2> : <h2>No tasks</h2>}  
+        {data ? <h2 className="px-5">Tareas Pendientes</h2> : <h2>No hay tareas</h2>}  
           {data.map((todo) => (
             <Todo todo={{ ...todo }} />
           ))}
