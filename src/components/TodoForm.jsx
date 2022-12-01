@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { TodoContext } from "../context/TodoContext";
 
 export const TodoForm = () => {
-  const { todos, addTodo } = useContext(TodoContext);
+  const { searchedTodos, addTodo, onToggle } = useContext(TodoContext);
   const [todoName, setTodoName] = useState("");
   const [todoDescription, setTodoDescription] = useState("");
   const [todoReminder, setTodoReminder] = useState(false);
@@ -10,7 +10,7 @@ export const TodoForm = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     const newTodo = {
-      id: todos.length + 1,
+      id: searchedTodos.length + 1,
       name: todoName,
       description: todoDescription,
       reminder: todoReminder,
@@ -19,6 +19,7 @@ export const TodoForm = () => {
     setTodoName("");
     setTodoDescription("");
     setTodoReminder(false);
+    onToggle();
   };
 
   return (

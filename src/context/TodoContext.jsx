@@ -6,15 +6,22 @@ export const TodoContext = createContext();
 
 export const TodoContextProvider = (props) => {
   const [todos, saveTodos] = useLocalStorage("todos_v1", []);
-  const [searchedTodos, setSearchedTodos] = useState(todos);
+  const [searchedTodos, setSearchedTodos] = useState([...todos]);
+  let initialTodos = [...todos];
+  const [addButtonState, setAddButtonState] = useState(false);
+
+  const onToggle = () => {
+    setAddButtonState(!addButtonState);
+  };
 
   /**
    * It takes a todo object as an argument, pushes it to the data array, and then saves the data
    * array to local storage
    */
   const addTodo = (todo) => {
-    data.push(todo);
-    saveTodos(data);
+    setSearchedTodos([...todos, todo]);
+    saveTodos([...todos, todo]);
+    initialTodos = [...todos];
   };
 
   /**
@@ -30,13 +37,29 @@ export const TodoContextProvider = (props) => {
       });
       setSearchedTodos(filteredTodos);
     } else {
-      setSearchedTodos(todos);
+      setSearchedTodos([...initialTodos]);
     }
+  };
+
+  const deleteTodo = (todoId) => {
+    const newTodos = todos.filter((todo) => todo.id != todoId);
+    setSearchedTodos([...newTodos]);
+    saveTodos(newTodos);
+    initialTodos = [...todos];
   };
 
   return (
     <TodoContext.Provider
-      value={{ data, addTodo, todos, searchTodos, searchedTodos }}
+      value={{
+        data,
+        addTodo,
+        todos,
+        searchTodos,
+        searchedTodos,
+        deleteTodo,
+        addButtonState,
+        onToggle,
+      }}
     >
       {props.children}
     </TodoContext.Provider>

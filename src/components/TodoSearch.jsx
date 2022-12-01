@@ -3,8 +3,8 @@ import { TodoContext } from "../context/TodoContext";
 import { MdSearch } from "react-icons/md";
 
 export const TodoSearch = () => {
-  const { searchTodos } = useContext(TodoContext);
   const [searchText, setSearchText] = useState("");
+  const { searchTodos } = useContext(TodoContext);
 
   const onSearch = (e) => {
     e.preventDefault();
@@ -18,7 +18,9 @@ export const TodoSearch = () => {
         value={searchText}
         placeholder={"Enter a todo name"}
         className="p-2 text-base w-11/12"
-        onChange={(e) => setSearchText(e.target.value)}
+        onChange={(e) => {
+          searchTodos(e.target.value);
+        }}
       />
       <button className=" bg-black w-7">
         <MdSearch className="text-white  text-xl mx-auto my-auto" />
